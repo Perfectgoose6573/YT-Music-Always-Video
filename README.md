@@ -1,40 +1,57 @@
-# YT Music Always Video
+# 📺 YT Music Always Video
 
 Automatically enables **video playback on YouTube Music** when a video version is available.
 
-This lightweight browser extension saves you from manually switching from *Song* to *Video* every time you listen.
+This lightweight browser extension saves you from manually switching from **Song** to **Video** while listening on YouTube Music.
 
 ---
 
 ## ✨ Features
 
 - Automatically switches to **Video mode** when available
-- Works seamlessly with **YouTube Music**
+- Designed specifically for **YouTube Music**
 - Simple popup with an **Auto Video toggle**
 - Optional **theme selector** (System / Light / Dark)
+- Lightweight and fast
 - No tracking, no ads, no accounts
 
 ---
 
-## 🌐 Where to install
+## 🌐 Supported Browsers (Chromium)
 
-The extension is available on the **Opera Add-ons Store**:
+This extension supports **Chromium-based browsers**, including:
 
-👉 https://addons.opera.com/extensions/details/yt-music-auto-video/  
-(*Replace this if your store URL is different*)
+- ✅ Opera
+- ✅ Opera GX
+- ✅ Google Chrome
+- ✅ Microsoft Edge
+- ✅ Brave
+- ✅ Vivaldi
 
-Simply install the extension from the store — **no manual installation required**.
+Firefox support may be added in the future.
+
+---
+
+## 🛒 Installation
+
+The extension is available through official browser extension stores.
+
+- **Opera / Opera GX** → Opera Add-ons  
+- **Chrome / Edge / Brave / Vivaldi** → Chrome Web Store  
+
+No manual installation is required.
 
 ---
 
 ## 🛠 How It Works
 
-When you play music on YouTube Music:
-- The extension checks if a *video version* exists
-- If so, it automatically switches to **Video mode**
-- If not, nothing changes
+When you play a track on **YouTube Music**:
 
-You can toggle **Auto Video** on/off in the popup.
+1. The extension checks if a video version is available
+2. If available, it automatically switches to **Video mode**
+3. If not available, playback remains unchanged
+
+You can enable or disable this behavior at any time using the **Auto Video** toggle in the extension popup.
 
 ---
 
@@ -42,9 +59,11 @@ You can toggle **Auto Video** on/off in the popup.
 
 | Permission | Purpose |
 |------------|---------|
-| `storage` | Saves your settings (Auto Video, Theme) |
+| `storage` | Saves your preferences (Auto Video, Theme) |
 | `tabs` | Detects the active YouTube Music tab |
-| Site access | Only runs on `music.youtube.com` |
+| Site access | Runs only on `music.youtube.com` |
+
+The extension does **not** access other websites.
 
 ---
 
@@ -54,7 +73,7 @@ This extension does **not** collect, store, transmit, or share any personal data
 
 All settings are stored locally using the browser’s storage API and are used only to control the extension’s behavior.
 
-No analytics, tracking, advertising, or external servers are used.
+The extension does not use analytics, tracking, advertising, or external servers.
 
 ---
 
@@ -74,7 +93,6 @@ Created by **PerfectGoose6573**
 
 ## 💬 Support
 
-Found a bug or have a suggestion?  
-Open an issue on GitHub:
+If you find a bug or have a suggestion, please open an issue on GitHub:
 
-https://github.com/Perfectgoose6573/YT-Music-Always-Video/issues
+👉 https://github.com/Perfectgoose6573/YT-Music-Always-Video/issues
