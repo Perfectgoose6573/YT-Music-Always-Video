@@ -17,6 +17,12 @@ This lightweight browser extension saves you from manually switching from **Song
 
 ---
 
+## 📸 Screenshot
+
+![Extension popup showing Auto Video toggle](screenshots/popup.png)
+
+---
+
 ## 🌐 Supported Browsers (Chromium)
 
 This extension supports **Chromium-based browsers**, including:
