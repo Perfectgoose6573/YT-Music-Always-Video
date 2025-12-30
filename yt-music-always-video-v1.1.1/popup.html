@@ -1,0 +1,264 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>YT Music Always Video</title>
+
+  <style>
+    :root {
+      --bg: #ffffff;
+      --fg: #111;
+      --muted: rgba(0, 0, 0, .65);
+      --card: rgba(0, 0, 0, .06);
+      --accent: #2ea043;
+      --border: rgba(0, 0, 0, .12);
+      --input: rgba(0, 0, 0, .04);
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #0f1115;
+        --fg: #e9eef6;
+        --muted: rgba(233, 238, 246, .7);
+        --card: rgba(255, 255, 255, .08);
+        --accent: #34d058;
+        --border: rgba(255, 255, 255, .16);
+        --input: rgba(255, 255, 255, .10);
+      }
+    }
+
+    html[data-theme="light"] {
+      --bg: #ffffff;
+      --fg: #111;
+      --muted: rgba(0, 0, 0, .65);
+      --card: rgba(0, 0, 0, .06);
+      --accent: #2ea043;
+      --border: rgba(0, 0, 0, .12);
+      --input: rgba(0, 0, 0, .04);
+    }
+
+    html[data-theme="dark"] {
+      --bg: #0f1115;
+      --fg: #e9eef6;
+      --muted: rgba(233, 238, 246, .7);
+      --card: rgba(255, 255, 255, .08);
+      --accent: #34d058;
+      --border: rgba(255, 255, 255, .16);
+      --input: rgba(255, 255, 255, .10);
+    }
+
+    body {
+      margin: 0;
+      padding: 12px;
+      width: 260px;
+      background: var(--bg);
+      color: var(--fg);
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+    }
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .title {
+      font-weight: 700;
+      font-size: 14px;
+    }
+
+    .sub {
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 2px;
+    }
+
+    .iconbtn {
+      width: 30px;
+      height: 30px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      background: var(--input);
+      color: var(--fg);
+      cursor: pointer;
+      display: grid;
+      place-items: center;
+      user-select: none;
+    }
+
+    .row {
+      margin-top: 12px;
+      padding: 10px;
+      background: var(--card);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .label {
+      font-size: 13px;
+    }
+
+    /* Toggle */
+    .switch {
+      position: relative;
+      width: 46px;
+      height: 26px;
+    }
+
+    .switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    .slider {
+      position: absolute;
+      inset: 0;
+      border-radius: 999px;
+      background: #888;
+      transition: .2s;
+    }
+
+    .slider:before {
+      content: "";
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      left: 3px;
+      top: 3px;
+      border-radius: 50%;
+      background: #fff;
+      transition: .2s;
+    }
+
+    input:checked + .slider {
+      background: var(--accent);
+    }
+
+    input:checked + .slider:before {
+      transform: translateX(20px);
+    }
+
+    /* Config panel */
+    .panel {
+      display: none;
+      margin-top: 12px;
+      padding: 10px;
+      background: var(--card);
+      border-radius: 12px;
+    }
+
+    .panel.open {
+      display: block;
+    }
+
+    .panel-title {
+      font-size: 12px;
+      font-weight: 700;
+      margin-bottom: 8px;
+      opacity: .8;
+    }
+
+    /* Dropdown */
+    .dropdown {
+      position: relative;
+      width: 120px;
+    }
+
+    .dropdown-btn {
+      width: 100%;
+      height: 28px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      background: var(--input);
+      color: var(--fg);
+      font-size: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 8px;
+      cursor: pointer;
+    }
+
+    .dropdown-menu {
+      position: absolute;
+      top: calc(100% + 6px);
+      left: 0;
+      right: 0;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      box-shadow: 0 8px 24px rgba(0,0,0,.35);
+      display: none;
+      z-index: 10;
+    }
+
+    .dropdown-menu.open {
+      display: block;
+    }
+
+    .item {
+      padding: 8px;
+      font-size: 12px;
+      cursor: pointer;
+    }
+
+    .item:hover {
+      background: var(--card);
+    }
+
+    .item.active {
+      background: var(--accent);
+      color: #fff;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="header">
+    <div>
+      <div class="title">YT Music Always Video</div>
+      <div class="sub">Auto-enable Video when available</div>
+    </div>
+
+    <button class="iconbtn" id="configBtn" title="Settings">⚙</button>
+  </div>
+
+  <!-- Auto Video (hidden when config open) -->
+  <div class="row" id="autoRow">
+    <div class="label">Auto Video</div>
+    <label class="switch">
+      <input id="autoVideo" type="checkbox" />
+      <span class="slider"></span>
+    </label>
+  </div>
+
+  <!-- Config panel -->
+  <div class="panel" id="configPanel">
+    <div class="panel-title">Settings</div>
+
+    <div class="row" style="margin-top:0;">
+      <div class="label">Theme</div>
+
+      <div class="dropdown">
+        <button class="dropdown-btn" id="themeBtn">
+          <span id="themeLabel">System</span>
+          <span>▾</span>
+        </button>
+
+        <div class="dropdown-menu" id="themeMenu">
+          <div class="item" data-value="system">System</div>
+          <div class="item" data-value="light">Light</div>
+          <div class="item" data-value="dark">Dark</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>
